@@ -10,15 +10,33 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var stateSwitch: UISwitch!
+    @IBOutlet weak var textField : UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        stateSwitch.addTarget(self, action: #selector(stateChanged), for: UIControlEvents.valueChanged)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func buttonTaped(_ sender: Any) {
+        if stateSwitch.isOn {
+            textField.text = "The Switch is Off"
+            stateSwitch.setOn(false, animated: true)
+        } else {
+            textField.text = "The Switch is On"
+            stateSwitch.setOn(true, animated: true)
+        }
     }
+
+    @objc func stateChanged(switchState: UISwitch) {
+        if switchState.isOn {
+            textField.text = "The Switch is On"
+        } else {
+            textField.text = "The Switch is Off"
+        }
+    }
+
 
 
 }
